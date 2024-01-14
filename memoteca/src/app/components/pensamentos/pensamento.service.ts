@@ -32,8 +32,8 @@ export class PensamentoService {
     return this.http.delete<Pensamento>(url)
   }
 
-  atualizar(id: string, pensamento: Pensamento){
-    const url = `${this.API}/${id}`
+  editar(pensamento: Pensamento): Observable<Pensamento>{
+    const url = `${this.API}/${pensamento.id}`
     return this.http.put<Pensamento>(url,pensamento)
   }
 
