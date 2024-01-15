@@ -11,8 +11,11 @@
       formControlName="conteudo"
       placeholder="Digite o pensamento"
     >
-    <div class="mensagem__erro" *ngIf="formulario.get('conteudo')?.errors && formulario.get('conteudo')?.touched">
+    <div class="mensagem__erro" *ngIf="formulario.get('conteudo')?.errors?.['required'] && formulario.get('conteudo')?.touched">
       Pensamento é obrigatório!
+    </div>
+    <div class="mensagem__erro" *ngIf="formulario.get('conteudo')?.errors?.['minusculo'] && formulario.get('conteudo')?.touched">
+      Apenas letras minusculas!
     </div>
     <label for="autoria">Autoria ou fonte</label>
     <input
@@ -27,6 +30,9 @@
     </div>
     <div class="mensagem__erro" *ngIf="formulario.get('autoria')?.errors?.['required'] && formulario.get('autoria')?.touched">
       Autoria é obrigatório!
+    </div>
+    <div class="mensagem__erro" *ngIf="formulario.get('autoria')?.errors?.['minusculo'] && formulario.get('autoria')?.touched">
+      Apenas letras minusculas!
     </div>
     <label for="modelo">Selecione o modelo do card:</label>
     <div class="container-radio">
