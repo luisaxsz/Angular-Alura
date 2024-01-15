@@ -1,5 +1,5 @@
 # Angular-Alura
-<img alt="Static Badge" src="https://img.shields.io/badge/Angular-Curso Em Andamento-red">
+<img alt="Static Badge" src="https://img.shields.io/badge/Angular-Curso Em Andamento-darkred">
 
 
 Repositorio para atividades feitas durante curso de formação em angular da alura
