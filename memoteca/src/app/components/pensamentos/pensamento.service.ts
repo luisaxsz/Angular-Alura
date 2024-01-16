@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import {HttpClient} from "@angular/common/http"
+import {HttpClient, HttpParams} from "@angular/common/http"
 import { Pensamento } from './pensamento';
 import { Observable } from 'rxjs';
 
@@ -14,8 +14,17 @@ export class PensamentoService {
 
   private readonly API = "http://localhost:3000/pensamentos"
 
-  listar(): Observable<Pensamento[]>{
-    return this.http.get<Pensamento[]>(this.API)
+  listar(pagina:number): Observable<Pensamento[]>{
+    const itemPorPag = 6;
+     //Http Params - Classe imutável
+     //Set substitui valor - nome parametro e valor
+    let params = new HttpParams().set("_page", pagina).set("_limit", itemPorPag);
+
+    //Api, objeto params e valor params
+    return this.http.get<Pensamento[]>(this.API, {params: params})
+
+    //Não indicado
+    //return this.http.get<Pensamento[]>(`${this.API}?page=${pagina}&_limit${itemPorPag}`)
   }
 
   buscarPorId(id: string): Observable<Pensamento> {
