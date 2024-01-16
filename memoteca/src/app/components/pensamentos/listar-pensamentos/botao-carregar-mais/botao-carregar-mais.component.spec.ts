@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BotaoCarregarMaisComponent } from './BotaoCarregarMaisComponent';
+import { BotaoCarregarMaisComponent } from './botao-carregar-mais.component';
 
 describe('BotaoCarregarMaisComponent', () => {
   let component: BotaoCarregarMaisComponent;
