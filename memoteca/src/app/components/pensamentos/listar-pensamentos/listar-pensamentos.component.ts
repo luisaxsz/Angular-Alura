@@ -20,7 +20,10 @@ export class ListarPensamentosComponent implements OnInit {
   }
 
   carregarMaisPensamentos(){
-    this.service.listar(++this.paginaAtual).subscribe(listaPensamentos =>{
+    //Pagina incrementada
+
+    this.service.listar(++this.paginaAtual).subscribe((listaPensamentos) =>{
+      //Spread operator -> pensamentos existentes + os 6 novos
       this.listaPensamentos.push(...listaPensamentos)
       if(!listaPensamentos.length){
           this.haMaisPensamentos = false
