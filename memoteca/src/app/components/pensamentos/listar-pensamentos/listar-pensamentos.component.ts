@@ -33,7 +33,6 @@ export class ListarPensamentosComponent implements OnInit {
   }
 
   buscarPensamentos(){
-    console.log("ativado")
     this.haMaisPensamentos = true;
     this.paginaAtual = 1;
     this.service.listar(this.paginaAtual, this.filtro).subscribe(

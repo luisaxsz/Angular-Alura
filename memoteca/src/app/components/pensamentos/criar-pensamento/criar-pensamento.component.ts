@@ -24,7 +24,8 @@ export class CriarPensamentoComponent implements OnInit {
       //Atributos do formulario
       conteudo: ['', Validators.compose([Validators.required, Validators.pattern(/(.|\s)*\S(.|\s)*/),minusculosValidators])],
       autoria:['', Validators.compose([Validators.required, Validators.minLength(3),minusculosValidators])],
-      modelo: ['modelo1']
+      modelo: ['modelo1'],
+      favorito: [false]
     })
 
     //Outra opção

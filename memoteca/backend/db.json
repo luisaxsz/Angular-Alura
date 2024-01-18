@@ -4,37 +4,43 @@
       "id": 1,
       "conteudo": "teste1",
       "autoria": "",
-      "modelo": "modelo1"
+      "modelo": "modelo1",
+      "favorito": true
     },
     {
       "id": 2,
       "conteudo": "teste2",
       "autoria": "Angular",
-      "modelo": "modelo1"
+      "modelo": "modelo1",
+      "favorito": false
     },
     {
       "conteudo": "teste id",
       "autoria": "teste id",
       "modelo": "modelo2",
+      "favorito": true,
       "id": 3
     },
     {
       "id": 5,
       "conteudo": "teste id2",
       "autoria": "teste id 11",
-      "modelo": "modelo3"
+      "modelo": "modelo3",
+      "favorito": false
     },
     {
       "conteudo": "yoda",
       "autoria": "teste busca",
       "modelo": "modelo3",
-      "id": 6
+      "id": 6,
+      "favorito": false
     },
     {
       "conteudo": "na minha maquina funciona!",
       "autoria": "dev",
       "modelo": "modelo2",
-      "id": 7
+      "id": 7,
+      "favorito": true
     }
   ]
 }
