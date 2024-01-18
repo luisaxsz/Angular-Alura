@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-
 @Component({
   selector: 'app-botao-carregar-mais',
   templateUrl: './botao-carregar-mais.component.html',
@@ -8,15 +7,11 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class BotaoCarregarMaisComponent implements OnInit {
 
-  //Recebe informação do elemento pai 
   @Input() haMaisPensamentos: boolean = false;
 
   constructor() { }
-
 
   ngOnInit(): void {
   }
 
 }
-
-
