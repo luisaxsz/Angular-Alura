@@ -29,7 +29,7 @@ export class PensamentoService {
     //return this.http.get<Pensamento[]>(`${this.API}?page=${pagina}&_limit${itemPorPag}`)
   }
 
-  buscarPorId(id: string): Observable<Pensamento> {
+  buscarPorId(id: number): Observable<Pensamento> {
     const url = `${this.API}/${id}`
     return this.http.get<Pensamento>(url)
   }
@@ -38,7 +38,7 @@ export class PensamentoService {
     return this.http.post<Pensamento>(this.API, pensamento)
   }
 
-  excluir(id: string): Observable<Pensamento> {
+  excluir(id: number): Observable<Pensamento> {
     const url = `${this.API}/${id}`
     return this.http.delete<Pensamento>(url)
   }
