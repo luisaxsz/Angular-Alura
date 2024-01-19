@@ -113,37 +113,134 @@
 
     <div class="formulario__campo">
       <label class="campo__etiqueta" for="cep">CEP</label>
-      <input name="cep" id="cep" class="campo__escrita" />
-      <div id="erro"></div>
+      <input
+        name="cep"
+        id="cep"
+        class="campo__escrita"
+        ngModel
+        required
+        #cep="ngModel"
+        minlength="8"
+        maxlength="9"
+        pattern="^(\d{5})(-?\d{3})$"
+        (blur)="consultaCep($event,f)"
+      />
+      <div *ngIf="(cep?.touched && cep?.invalid) || cep?.dirty">
+        <app-mensagens
+          *ngIf="cep?.errors?.['required']"
+          mensagem="cep é obrigatório."
+        ></app-mensagens>
+        <app-mensagens
+          *ngIf="cep?.errors?.['pattern']"
+          mensagem="O cep está inválido, use o padrão 'XXXX-XXX'"
+        ></app-mensagens>
+      </div>
     </div>
 
     <div class="formulario__campo">
       <label class="campo__etiqueta" for="endereco">Endereço</label>
-      <input name="endereco" id="endereco" class="campo__escrita" />
+      <input
+        name="endereco"
+        id="endereco"
+        class="campo__escrita"
+        required
+        minlength="3"
+        #endereco="ngModel"
+        ngModel
+      />
+      <div *ngIf="(endereco?.touched && endereco?.invalid) || endereco?.dirty">
+        <app-mensagens
+          *ngIf="endereco?.errors?.['required']"
+          mensagem="endereco é obrigatório."
+        ></app-mensagens>
+        <app-mensagens
+          *ngIf="endereco?.errors?.['minlength']"
+          mensagem="O endereco tem que conter mais de 3 caracteres"
+        ></app-mensagens>
+      </div>
     </div>
     <div class="formulario__dupla">
       <div class="formulario__campo">
         <label class="campo__etiqueta" for="numero">Numero</label>
-        <input name="numero" id="numero" class="campo__escrita" />
+        <input
+          name="numero"
+          id="numero"
+          class="campo__escrita"
+          ngModel
+          #numero="ngModel"
+          required
+          minlength="1"
+        />
+        <div *ngIf="(numero?.touched && numero?.invalid) || numero?.dirty">
+          <app-mensagens
+            *ngIf="numero?.errors?.['required']"
+            mensagem="numero é obrigatório."
+          ></app-mensagens>
+          <app-mensagens
+            *ngIf="numero?.errors?.['minlength']"
+            mensagem="O numero tem que conter mais de 1 caracteres"
+          ></app-mensagens>
+        </div>
       </div>
       <div class="formulario__campo">
         <label class="campo__etiqueta" for="complemento">Complemento</label>
-        <input name="complemento" id="complemento" class="campo__escrita" />
+        <input
+          name="complemento"
+          id="complemento"
+          class="campo__escrita"
+          ngModel
+        />
       </div>
     </div>
     <div class="formulario__campo">
       <label class="campo__etiqueta" for="bairro">Bairro</label>
-      <input name="bairro" id="bairro" class="campo__escrita" />
+      <input
+        name="bairro"
+        id="bairro"
+        class="campo__escrita"
+        ngModel
+        #bairro="ngModel"
+        required
+        minlength="3"
+      />
+      <div *ngIf="(bairro?.touched && bairro?.invalid) || bairro?.dirty">
+        <app-mensagens
+          *ngIf="bairro?.errors?.['required']"
+          mensagem="bairro é obrigatório."
+        ></app-mensagens>
+        <app-mensagens
+          *ngIf="bairro?.errors?.['minlength']"
+          mensagem="O bairro tem que conter mais de 3 caracteres"
+        ></app-mensagens>
+      </div>
     </div>
     <div class="formulario__dupla">
       <div class="formulario__campo">
         <label class="campo__etiqueta" for="cidade">Cidade</label>
-        <input name="cidade" id="cidade" class="campo__escrita" />
+        <input
+          name="cidade"
+          id="cidade"
+          class="campo__escrita"
+          ngModel
+          required
+          minlength="3"
+          #cidade="ngModel"
+        />
+        <div *ngIf="(cidade?.touched && cidade?.invalid) || cidade?.dirty">
+          <app-mensagens
+            *ngIf="cidade?.errors?.['required']"
+            mensagem="cidade é obrigatório."
+          ></app-mensagens>
+          <app-mensagens
+            *ngIf="cidade?.errors?.['minlength']"
+            mensagem="O cidade tem que conter mais de 3 caracteres"
+          ></app-mensagens>
+        </div>
       </div>
 
       <div class="formulario__campo">
         <label class="campo__etiqueta" for="estado">UF</label>
-        <select id="estado" name="estado" class="campo__escrita">
+        <select id="estado" name="estado" class="campo__escrita" ngModel #estado="ngModel" required>
           <option value="AC">Acre</option>
           <option value="AL">Alagoas</option>
           <option value="AP">Amapá</option>
@@ -173,6 +270,12 @@
           <option value="TO">Tocantins</option>
           <option value="EX">Estrangeiro</option>
         </select>
+      </div>
+      <div *ngIf="(estado?.touched && estado?.invalid) || estado?.dirty">
+        <app-mensagens
+          *ngIf="estado?.errors?.['required']"
+          mensagem="Estado é obrigatório."
+        ></app-mensagens>
       </div>
     </div>
     <button type="submit" class="formulario__botao">Enviar formulário</button>
