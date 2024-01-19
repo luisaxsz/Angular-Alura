@@ -14,7 +14,7 @@ export class PensamentoService {
 
   private readonly API = "http://localhost:3000/pensamentos"
 
-  listar(pagina: number, filtro: string): Observable<Pensamento[]>{
+  listar(pagina: number, filtro: string, favoritos: boolean): Observable<Pensamento[]>{
     const itensPorPagina = 6;
      //Http Params - Classe imutável
      //Set substitui valor - nome parametro e valor
@@ -26,12 +26,31 @@ export class PensamentoService {
       //O params retorna um novo objeto ent é necessario declarar dessa maneira para poder modificar objeto existente
       params = params.set("q", filtro )
     }
+
+    if(favoritos){
+      params = params.set("favorito", true)
+    }
     //Api, objeto params e valor params
     return this.http.get<Pensamento[]>(this.API, { params })
 
     //Não indicado
     //return this.http.get<Pensamento[]>(`${this.API}?page=${pagina}&_limit${itemPorPag}`)
   }
+
+  // listarPensamentosFavoritos(pagina: number,filtro: string): Observable<Pensamento[]>{
+  //   const itensPorPagina = 6;
+  //   let params = new HttpParams()
+  //   .set("_page",pagina)
+  //   .set("_limit", itensPorPagina)
+  //   .set("favorito", true);
+
+  //  if(filtro.trim().length >= 2){
+  //    params = params.set("q", filtro )
+  //  }
+
+  //  return this.http.get<Pensamento[]>(this.API, { params })
+
+  // }
 
   buscarPorId(id: number): Observable<Pensamento> {
     const url = `${this.API}/${id}`

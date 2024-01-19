@@ -12,13 +12,13 @@
       "conteudo": "teste2",
       "autoria": "Angular",
       "modelo": "modelo1",
-      "favorito": true
+      "favorito": false
     },
     {
       "conteudo": "teste id",
       "autoria": "teste id",
       "modelo": "modelo2",
-      "favorito": false,
+      "favorito": true,
       "id": 3
     },
     {

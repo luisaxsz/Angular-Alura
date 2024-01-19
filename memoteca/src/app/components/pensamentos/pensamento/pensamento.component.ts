@@ -17,6 +17,8 @@ export class PensamentoComponent implements OnInit {
     favorito: false
   }
 
+  @Input() listaFavoritos: Pensamento [] = [];
+
   constructor(
     private service: PensamentoService
   ) { }
@@ -41,6 +43,10 @@ export class PensamentoComponent implements OnInit {
   }
 
   mudarFavorito(){
-    this.service.mudarFavorito(this.pensamento).subscribe()
+    this.service.mudarFavorito(this.pensamento).subscribe(
+      //posição do favorito dentro do array e quantidade de itens que quer remover
+      //como não sei qual o indicie passa o indexOf
+      () => {this.listaFavoritos.splice(this.listaFavoritos.indexOf(this.pensamento), 1)}
+    )
   }
 }
