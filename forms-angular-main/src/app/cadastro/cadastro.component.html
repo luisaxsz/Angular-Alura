@@ -1,27 +1,119 @@
 <main class="principal">
   <h2 class="principal__titulo">Dados do cadastro</h2>
 
-  <form class="principal__formulario" id="formulario">
+  <form
+    class="principal__formulario"
+    id="formulario"
+    #f="ngForm"
+    (ngSubmit)="cadastrar(f)"
+  >
     <h3 class="principal__subtitulo">Dados pessoais</h3>
     <div class="formulario__campo">
       <label class="campo__etiqueta" for="nome">Nome Completo</label>
-      <input name="nome" id="nome" class="campo__escrita">
+      <input
+        name="nome"
+        id="nome"
+        class="campo__escrita"
+        ngModel
+        required
+        minlength="3"
+        #nome="ngModel"
+      />
+      <div *ngIf="(nome?.touched && nome?.invalid) || nome?.dirty">
+        <app-mensagens
+          *ngIf="nome?.errors?.['required']"
+          mensagem="Nome é obrigatório."
+        ></app-mensagens>
+        <app-mensagens
+          *ngIf="nome?.errors?.['minlength']"
+          mensagem="O nome deve ter no min 3 caracteres."
+        ></app-mensagens>
+      </div>
     </div>
     <div class="formulario__dupla">
       <div class="formulario__campo">
         <label class="campo__etiqueta" for="nascimento">Nascimento</label>
-        <input name="nascimento" id="nascimento" type="date" class="campo__escrita"/>
+        <input
+          name="nascimento"
+          id="nascimento"
+          type="date"
+          class="campo__escrita"
+          ngModel
+          required
+        />
+      </div>
+      <div
+        *ngIf="
+          (f.controls['nascimento']?.touched &&
+            f.controls['nascimento']?.invalid) ||
+          f.controls['nascimento']?.dirty
+        "
+      >
+        <span
+          class="erro__texto"
+          *ngIf="f.controls['nascimento']?.errors?.['required']"
+          >O nascimento é obrigatório.</span
+        >
       </div>
       <div class="formulario__campo">
         <label class="campo__etiqueta" for="telefone">Contato</label>
-        <input name="telefone" id="telefone" type="tel" placeholder="(XX) XXXXX-XXXX" class="campo__escrita"/>
+        <input
+          name="telefone"
+          id="telefone"
+          type="tel"
+          placeholder="(XX) XXXXX-XXXX"
+          class="campo__escrita"
+          ngModel
+          required
+          pattern="(\(?\d{2}\)?\s?)(\d{5}\-?\d{4})"
+        />
+        <div
+          *ngIf="
+            (f.controls['telefone']?.touched &&
+              f.controls['telefone']?.invalid) ||
+            f.controls['telefone']?.dirty
+          "
+        >
+          <span
+            class="erro__texto"
+            *ngIf="f.controls['telefone']?.errors?.['required']"
+            >O telefone é obrigatório.</span
+          >
+          <span
+            class="erro__texto"
+            *ngIf="f.controls['telefone']?.errors?.['pattern']"
+            >Telefone inválido, siga o exemplo (XX) XXXXX-XXXX
+          </span>
+        </div>
       </div>
     </div>
     <div class="formulario__campo">
       <label class="campo__etiqueta" for="email">E-mail</label>
-      <input name="email" id="email" type="email" class="campo__escrita"/>
+      <input
+        name="email"
+        id="email"
+        type="email"
+        class="campo__escrita"
+        ngModel
+        required
+        pattern="^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$"
+      />
     </div>
-
+    <div
+      *ngIf="
+        (f.controls['email']?.touched && f.controls['email']?.invalid) ||
+        f.controls['email']?.dirty
+      "
+    >
+      <span
+        class="erro__texto"
+        *ngIf="f.controls['email']?.errors?.['required']"
+        >O Email é obrigatório.</span
+      >
+      <span class="erro__texto" *ngIf="f.controls['email']?.errors?.['pattern']"
+        >O Email está inválido, siga o padrão 'exemplo&#64;gmail.com'</span
+      >
+    </div>
 
     <h3 class="principal__subtitulo">Endereço</h3>
 
@@ -88,8 +180,7 @@
           <option value="EX">Estrangeiro</option>
         </select>
       </div>
-
     </div>
     <button type="submit" class="formulario__botao">Enviar formulário</button>
-    </form>
+  </form>
 </main>
