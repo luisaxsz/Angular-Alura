@@ -1,9 +1,13 @@
 <section class="main">
-  <app-input>
+  <app-input [itemQueVaiSerEditado]="itemParaEditar">
   </app-input>
   <div class="container">
     <div class="lista">
       <h4 class="title-list">Lista de Compras</h4>
+      <div  *ngFor="let item of listaDeCompra">
+        <!--Item declarado no item component com o input para receber valor de um elemento pai, [item]="item" item de item component recebe item do app component da repetição-->
+          <app-item [item]="item" (emitindoItemParaEditar)="editarItem($event)"></app-item>
+      </div>
     </div>
-  </div>
+    </div>
 </section>
