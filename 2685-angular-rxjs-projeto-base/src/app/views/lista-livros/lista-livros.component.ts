@@ -1,7 +1,8 @@
-import { VolumeInfo, ImageLinks } from './../../models/intefaces';
+import {  Item } from './../../models/intefaces';
 import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Livro } from 'src/app/models/intefaces';
+import { LivroVolumeInfo } from 'src/app/models/livroVolumeInfo';
 import { LivroService } from 'src/app/service/livro.service';
 
 @Component({
@@ -17,26 +18,30 @@ export class ListaLivrosComponent implements OnDestroy {
 
   constructor(private service: LivroService) {}
 
-  livrosResultadoParaLivros(items): Livro[] {
+  livrosResultadoParaLivros(item: Item[]): LivroVolumeInfo[] {
     //Iterar cada elemento do array
     //E atribuir propriedades
-    const livros: Livro[] = [];
+    //Refatorado para livro volume info
 
-    items.forEach((item) => {
-      livros.push(
-        (this.livro = {
-          title: item.volumeInfo?.title,
-          authors: item.volumeInfo?.authors,
-          publisher: item.volumeInfo?.publisher,
-          publishedDate: item.volumeInfo?.publishedDate,
-          description: item.volumeInfo?.description,
-          previewLink: item.volumeInfo?.previewLink,
-          thumbnail: item.volumeInfo?.imageLinks?.thumbnail,
-        })
-      );
+    // const livros: Livro[] = [];
+
+    // items.forEach((item) => {
+    //   livros.push(
+    //     (this.livro = {
+    //       title: item.volumeInfo?.title,
+    //       authors: item.volumeInfo?.authors,
+    //       publisher: item.volumeInfo?.publisher,
+    //       publishedDate: item.volumeInfo?.publishedDate,
+    //       description: item.volumeInfo?.description,
+    //       previewLink: item.volumeInfo?.previewLink,
+    //       thumbnail: item.volumeInfo?.imageLinks?.thumbnail,
+    //     })
+    //   );
+    // });
+
+    return item.map(item => {
+      return new LivroVolumeInfo(item)
     });
-
-    return livros;
   }
 
   buscarLivros() {
