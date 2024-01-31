@@ -15,12 +15,13 @@ export class LivroService {
   private readonly API = "https://www.googleapis.com/books/v1/volumes"
 
 
-  listarLivros(valorDigitado: string): Observable<Item[]>{
+  listarLivros(valorDigitado: string): Observable<LivrosResultado>{
     const params = new HttpParams().append('q', valorDigitado)
-    return this.http.get<LivrosResultado>(this.API,{ params }).pipe(
-      map(resultado => resultado.items),
-      tap(resultado => console.log(resultado))
-    )
+    return this.http.get<LivrosResultado>(this.API,{ params })
+    //.pipe(
+    //   // map(resultado => resultado.items ?? []),
+    //   tap(resultado => console.log(resultado))
+    // )
   }
 
 }

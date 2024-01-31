@@ -1,7 +1,19 @@
 import { FormControl } from '@angular/forms';
-import { Item } from './../../models/intefaces';
+import { Item, LivrosResultado } from './../../models/intefaces';
 import { Component, OnDestroy } from '@angular/core';
-import { Subscription, debounceTime, distinctUntilChanged, filter, map, switchMap, tap } from 'rxjs';
+import {
+  EMPTY,
+  Subscription,
+  catchError,
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  map,
+  of,
+  switchMap,
+  tap,
+  throwError,
+} from 'rxjs';
 import { Livro } from 'src/app/models/intefaces';
 import { LivroVolumeInfo } from 'src/app/models/livroVolumeInfo';
 import { LivroService } from 'src/app/service/livro.service';
@@ -18,14 +30,34 @@ export class ListaLivrosComponent {
   // listaLivros: Livro[];
   // subscription: Subscription;
   campoBusca = new FormControl();
+  mensagemErro: string = '';
+  livrosResultado: LivrosResultado;
   // livro: Livro;
+  totalLivros$ = this.campoBusca.valueChanges.pipe(
+    debounceTime(PAUSA),
+    filter((valorDigitado) => valorDigitado.length >= 3),
+    distinctUntilChanged(),
+    switchMap((valorDigitado) => this.service.listarLivros(valorDigitado)),
+    map(resultado => this.livrosResultado = resultado),
+    catchError(erro => {
+      console.log(erro)
+      return of();
+    })
+  )
   //$ -> representa observable
   livrosEncontrados$ = this.campoBusca.valueChanges.pipe(
     debounceTime(PAUSA),
     filter((valorDigitado) => valorDigitado.length >= 3),
     distinctUntilChanged(),
     switchMap((valorDigitado) => this.service.listarLivros(valorDigitado)),
-    map(itens => this.livrosResultadoParaLivros(itens))
+    map(resultado => resultado.items ?? []),
+    map((itens) => this.livrosResultadoParaLivros(itens)),
+    catchError((error) => {
+      // this.mensagemErro = 'Ops ocorreu um erro, recarregue  a aplicação'
+      // return EMPTY;
+      // console.log(error);
+      return throwError(() => new Error(this.mensagemErro = 'Ops ocorreu um erro, recarregue  a aplicação'));
+    })
   );
 
   constructor(private service: LivroService) {}
