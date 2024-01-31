@@ -1,10 +1,12 @@
 import { FormControl } from '@angular/forms';
 import { Item } from './../../models/intefaces';
 import { Component, OnDestroy } from '@angular/core';
-import { Subscription, map, switchMap, tap } from 'rxjs';
+import { Subscription, debounceTime, distinctUntilChanged, filter, map, switchMap, tap } from 'rxjs';
 import { Livro } from 'src/app/models/intefaces';
 import { LivroVolumeInfo } from 'src/app/models/livroVolumeInfo';
 import { LivroService } from 'src/app/service/livro.service';
+
+const PAUSA = 300;
 
 @Component({
   selector: 'app-lista-livros',
@@ -19,6 +21,9 @@ export class ListaLivrosComponent {
   // livro: Livro;
   //$ -> representa observable
   livrosEncontrados$ = this.campoBusca.valueChanges.pipe(
+    debounceTime(PAUSA),
+    filter((valorDigitado) => valorDigitado.length >= 3),
+    distinctUntilChanged(),
     switchMap((valorDigitado) => this.service.listarLivros(valorDigitado)),
     map(itens => this.livrosResultadoParaLivros(itens))
   );
