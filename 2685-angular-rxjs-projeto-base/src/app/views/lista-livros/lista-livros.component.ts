@@ -1,6 +1,7 @@
-import {  Item } from './../../models/intefaces';
+import { FormControl } from '@angular/forms';
+import { Item } from './../../models/intefaces';
 import { Component, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, map, switchMap, tap } from 'rxjs';
 import { Livro } from 'src/app/models/intefaces';
 import { LivroVolumeInfo } from 'src/app/models/livroVolumeInfo';
 import { LivroService } from 'src/app/service/livro.service';
@@ -10,11 +11,17 @@ import { LivroService } from 'src/app/service/livro.service';
   templateUrl: './lista-livros.component.html',
   styleUrls: ['./lista-livros.component.css'],
 })
-export class ListaLivrosComponent implements OnDestroy {
-  listaLivros: Livro[];
-  subscription: Subscription;
-  campoBusca: string = '';
-  livro: Livro;
+export class ListaLivrosComponent {
+  //Criada diretamente no templape com pipe async
+  // listaLivros: Livro[];
+  // subscription: Subscription;
+  campoBusca = new FormControl();
+  // livro: Livro;
+  //$ -> representa observable
+  livrosEncontrados$ = this.campoBusca.valueChanges.pipe(
+    switchMap((valorDigitado) => this.service.listarLivros(valorDigitado)),
+    map(itens => this.livrosResultadoParaLivros(itens))
+  );
 
   constructor(private service: LivroService) {}
 
@@ -39,21 +46,21 @@ export class ListaLivrosComponent implements OnDestroy {
     //   );
     // });
 
-    return item.map(item => {
-      return new LivroVolumeInfo(item)
+    return item.map((item) => {
+      return new LivroVolumeInfo(item);
     });
   }
 
-  buscarLivros() {
-    this.subscription = this.service.listarLivros(this.campoBusca).subscribe({
-      next: (items) => {
-        this.listaLivros = this.livrosResultadoParaLivros(items);
-      },
-      error: (error) => console.error(error),
-    });
-  }
+  // buscarLivros() {
+  //   this.subscription = this.service.listarLivros(this.campoBusca).subscribe({
+  //     next: (items) => {
+  //       this.listaLivros = this.livrosResultadoParaLivros(items);
+  //     },
+  //     error: (error) => console.error(error),
+  //   });
+  // }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
+  // ngOnDestroy() {
+  //   this.subscription.unsubscribe();
+  // }
 }
