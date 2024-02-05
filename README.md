@@ -12,5 +12,5 @@ Repositorio para atividades feitas durante curso de formação em angular da alu
 - Angular: Ciclo de Vida <img alt="Static Badge" src="https://img.shields.io/badge/Concluído-green">
 - RxJs e Angular: Programando de Forma Reativa <img alt="Static Badge" src="https://img.shields.io/badge/Concluído-green">
 ### 3 - Melhore a experiência do usuário com animações e interações atrativas no Angular 
-- Angular: Torne sua aplicação interativa e personalizada com animações <img alt="Static Badge" src="https://img.shields.io/badge/Em andamento-darkred">
-- Angular: Aprimore suas técnicas de animação e crie interfaces ainda mais atraentes
+- Angular: Torne sua aplicação interativa e personalizada com animações <img alt="Static Badge" src="https://img.shields.io/badge/Concluído-green">
+- Angular: Aprimore suas técnicas de animação e crie interfaces ainda mais atraentes  <img alt="Static Badge" src="https://img.shields.io/badge/Em andamento-darkred">
