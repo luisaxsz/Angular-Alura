@@ -7,6 +7,8 @@
     [formGroup]="formulario"
     *ngIf="formAberto"
     @showStateTrigger
+    [@formButton]="formulario.valid ? 'valid' : 'invalid'"
+
   >
     <label for="descricao">Descrição da tarefa</label>
     <input
@@ -48,6 +50,7 @@
       <button
         (click)="salvarTarefa()"
         class="botao-form"
+        id="botao-salvar"
         [ngClass]="habilitarBotao()"
         [disabled]="!formulario.valid"
       >
@@ -67,10 +70,21 @@
       alt="Ilustração de um ambiente com mesa, computador, quadro e um vaso com planta"
     />
   </div>
-  <div *ngIf="listaTarefas.length > 0; else semTarefas">
+  <div class="busca">
+    <p class="ff-prompt">Procurando o que fazer?</p>
+    <input
+      type="search"
+      id="campo-busca"
+      placeholder="Busque por uma tarefa"
+      [(ngModel)]="campoBusca"
+      (keyup)="filtrarTarefasPorDescricao(campoBusca)"
+    />
+  </div>
+  <div *ngIf="tarefasFiltradas.length > 0; else semTarefas">
     <div
+      @filterAnimation
       class="lista-tarefas card-{{ tarefa.categoria }}"
-      *ngFor="let tarefa of listaTarefas; let i = index"
+      *ngFor="let tarefa of tarefasFiltradas; let i = index"
       (mouseover)="indexTarefa = i"
       [@highlightedState]="indexTarefa === i ? 'highlighted' : 'default'"
     >
@@ -87,13 +101,13 @@
         </p>
         <p class="status-tarefa">
           <button
-          [ngClass]="
+            [ngClass]="
               tarefa.statusFinalizado == true
-              ? 'icone-checked'
-              : 'icone-unchecked'
-              "
+                ? 'icone-checked'
+                : 'icone-unchecked'
+            "
             (click)="finalizarTarefa(tarefa.id)"
-            [@checkedTrigger] = "(tarefa.id === id ? 'checked' : 'unchecked')"
+            [@checkedTrigger]="tarefa.id === id ? 'checked' : 'unchecked'"
           ></button>
         </p>
       </div>
@@ -117,5 +131,5 @@
   </div>
 </section>
 <ng-template #semTarefas>
-  <p class="ng-template ff-prompt">Olá! Ainda não há tarefas por aqui! :)</p>
+  <p class="ng-template ff-prompt" @flyInOut >Olá! Ainda não há tarefas por aqui! :)</p>
 </ng-template>
