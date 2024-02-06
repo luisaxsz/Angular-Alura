@@ -1,3 +1,18 @@
 {
-  "tarefas": []
+  "tarefas": [
+    {
+      "id": 1,
+      "descricao": "estudar java",
+      "categoria": "Estudos",
+      "statusFinalizado": false,
+      "prioridade": "Alta"
+    },
+    {
+      "id": 2,
+      "descricao": "aaa",
+      "statusFinalizado": true,
+      "categoria": "Casa",
+      "prioridade": "Alta"
+    }
+  ]
 }
