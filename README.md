@@ -3,6 +3,12 @@
 
 
 Repositorio para atividades feitas durante curso de formação em angular da alura
+Assuntos Abordados:
+- Compreender os conceitos de arquitetura do framework
+- Desenvolver o seu primeiro CRUD (Criar, Ler, Atualizar e Deletar) usando o Angular
+- Evoluir a aplicação com novas funcionalidades e refatoração de código
+- Trabalhar com formulários orientados a templates, uso de diretivas e comunicação entre componentes
+- Programar de forma reativa utilizando a biblioteca RxJS
 ## Cursos da Formação
 ### 1 - Explore as bases do Angular
 - Angular 14: Aplique conceitos e desenvolva seu primeiro CRUD <img alt="Static Badge" src="https://img.shields.io/badge/Concluído-green">
