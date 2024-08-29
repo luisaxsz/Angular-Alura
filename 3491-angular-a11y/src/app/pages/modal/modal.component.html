@@ -8,7 +8,7 @@
       alt="Capa do livro: {{ livro.title }}"
     >
     <section class="info-card">
-      <h2 class="titulo">{{ livro.title }}</h2>
+      <h2 [attr.aria-label]="'titulo do livro' + livro.title" ] class="titulo">{{ livro.title }}</h2>
       <p class="informacoes">Autoria:</p>
       <p class="resultado">{{ livro.authors }}</p>
       <p class="informacoes">Data de publicação:</p>
@@ -16,10 +16,10 @@
       <p class="informacoes">Editora:</p>
       <p class="resultado">{{ livro.publisher }}</p>
       <div class="botoes">
-        <button (click)="lerPrevia()" class="detalhes">Ler prévia</button>
+        <button [attr.aria-label]="'Ler prévia do livro' + livro.title" (click)="lerPrevia()" class="detalhes">Ler prévia</button>
       </div>
     </section>
-    <button (click)="fecharModal()" class="botao-fechar">
+    <button aria-label="Fechar Prévia" (click)="fecharModal()" class="botao-fechar">
       <span class="material-symbols-outlined">close</span>
     </button>
     <section class="sinopse">

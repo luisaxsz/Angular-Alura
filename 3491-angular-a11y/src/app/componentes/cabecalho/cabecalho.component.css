@@ -24,3 +24,12 @@ header a {
   height: 60px;
 }
 
+header .active-page{
+  background-color: #6C63FF;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+}
+
+header .active-page.logo{
+  background-color: #f5f5f5;
+}
