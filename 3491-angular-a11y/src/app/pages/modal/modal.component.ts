@@ -1,30 +1,43 @@
 import {
-  Component,
-  EventEmitter,
+  Component, ElementRef,
+  EventEmitter, HostListener,
   Input,
-  Output,
+  Output, Renderer2,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { Livro } from '../../models/interfaces';
+import {A11yModule} from "@angular/cdk/a11y";
 
 @Component({
   selector: 'app-modal',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, A11yModule],
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.css'
 })
 export class ModalComponent {
   @Input() livro!: Livro;
   statusModal: boolean = true;
+
   @Output() mudouModal = new EventEmitter<boolean>()
 
-  constructor() {}
+  @HostListener('document:keydown.escape', ['$event']) fecharModalComEsc() {
+    if (this.statusModal){
+      this.fecharModal();
+    }
+  }
+
+  constructor(
+    private element: ElementRef,
+    private renderer: Renderer2
+  ) {}
 
   fecharModal() {
     this.statusModal = false
     this.mudouModal.emit(this.statusModal)
+    this.renderer.setStyle(this.element.nativeElement.ownerDocument.body, 'overflow', 'scroll');
+
   }
 
   lerPrevia() {
